@@ -1,20 +1,51 @@
-const cekApi = async (key) => {
+const cekKey = (object1, object2) => {
+    for (const key1 in object1) {
+        let hasil
+        for (const key2 in object2) {
+            if(key1 == key2){
+                hasil = true
+                break
+            }else{
+                hasil = false
+            }
+        }
+        if(!hasil){
+            return false
+        }
+    }
+    return true
+}
+
+const cekValue = (object1, object2) => {
+    for (const key1 in object1) {
+        let hasil
+        for (const key2 in object2) {
+            if(object1[key1] == object2[key2]){
+                hasil = true
+                break
+            }else{
+                hasil = false
+            }
+        }
+        if(!hasil){
+            return false
+        }
+    }
+    return true
+}
+
+
+const cekApi = async (inputObject) => {
     try {
         let getApi = await fetch('https://reqres.in/api/users/4')
         let object = await getApi.json()
         
-        let {id, email, first_name, last_name, avatar} = object.data
-        if( id == key.id && 
-            email == key.email && 
-            first_name == key.first_name && 
-            last_name == key.last_name && 
-            avatar == key.avatar
-            ){
-            console.log('true')
+        if(cekKey(inputObject, object.data)){
+            if(cekValue(inputObject, object.data)) console.log(true)
+            else console.log(false)
         }
-        else{
-            console.log('false')
-        }
+        else console.log(false)
+
     } catch (error) {
         console.log(error)
     }
@@ -36,4 +67,4 @@ let data2 = {
     avatar: "https://reqres.in/img/faces/4-image.jpg"
     }
     
-cekApi(data2)
+cekApi(data)
