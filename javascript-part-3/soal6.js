@@ -59,7 +59,7 @@ let data = {
     avatar: "https://reqres.in/",
     }
 
-let data2 = {
+let dataDariApi = {
     id: 4,
     email: "eve.holt@reqres.in",
     first_name: "Eve",
@@ -67,4 +67,4 @@ let data2 = {
     avatar: "https://reqres.in/img/faces/4-image.jpg"
     }
     
-cekApi(data)
+cekApi(dataDariApi)

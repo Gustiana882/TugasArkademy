@@ -50,7 +50,7 @@ const cariBuku = (namaBuku) =>{
     })
 }
 
-cariBuku('komik')
+cariBuku('majah')
     .then((response)=>{
         console.log(response)
     })

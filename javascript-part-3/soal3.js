@@ -5,13 +5,14 @@ const karakterAngka = () => {
 }
 
 const karakterUp = (string) => {
-    // 2
+    // index = 2
+    // c => C
     // 01 2 345
     // ab|c|def
-    // c = C
-    // ab + C + def
+    // data = ab + C + def
     let index = Math.floor(Math.random()*string.length)
-    return string.substr(0, index) + string[index].toUpperCase() + string.substr(index+1, string.length)
+    let data = string.substr(0, index) + string[index].toUpperCase() + string.substr(index+1, string.length)
+    return data
 }
 
 const spesialKarakter = (string) =>{

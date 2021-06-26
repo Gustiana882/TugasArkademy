@@ -15,24 +15,24 @@ const cekHariKerja = (day) => {
 }
 
 
-cekHariKerja('senin')
-    .then((res)=>{
-        console.log(`${res} hari ini hari kerja`)
-    })
-    .catch((err)=>{
-        console.log(err)
-    })
+// cekHariKerja('minggu')
+//     .then((res)=>{
+//         console.log(`${res} hari ini hari kerja`)
+//     })
+//     .catch((err)=>{
+//         console.log(err)
+//     })
 
 
-// const hari = async() =>{
-//     try {
-//         const status = await cekHariKerja('senin')
-//         console.log(`${status} hari ini hari kerja`)
+const hari = async() =>{
+    try {
+        const status = await cekHariKerja('senin')
+        console.log(`${status} hari ini hari kerja`)
         
-//     } catch (error) {
-//         console.log(error)
+    } catch (error) {
+        console.log(error)
         
-//     }
-// }
+    }
+}
 
-// hari()
+hari()
