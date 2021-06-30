@@ -1,6 +1,5 @@
 const reverseWord = (props) => {
-    let input = props.toLowerCase()
-    let text = input.split(' ').reverse().join(' ');
+    let text = props.split(' ').reverse().join(' ');
     console.log(text)
 }
 

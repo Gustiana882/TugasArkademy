@@ -55,7 +55,7 @@ const findRepeatName = (arr, callback) => {
                 obj.push(data)
             }
         }
-
+        //console.log(obj)
         return callback(obj)
 
     } else {

@@ -1,5 +1,4 @@
 const findClosestNum =(array, find) => {
-    let data
     array.sort((b, a)=> a-b)
     for (const i in array) {
         if(array[i] <= find){
@@ -9,4 +8,4 @@ const findClosestNum =(array, find) => {
     }
 }
 
-findClosestNum([1,2,4,5,7,8,34,6,7,], 12)
+findClosestNum([1,2,4,5,7,8,34,6,7,11], 12)

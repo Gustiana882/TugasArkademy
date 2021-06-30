@@ -6,4 +6,4 @@ const palindrom = (props) => {
     (text === input) ? console.log('palindrom') : console.log('bukan palindrom');
 }
 
-palindrom("Malam")
+palindrom("Siang")
