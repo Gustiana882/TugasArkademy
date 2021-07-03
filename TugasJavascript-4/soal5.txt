@@ -1,7 +1,0 @@
-- mulai
-- masukan number
-- kelompokan nomor di mana 0 sebagai pembatasnya
-- urutkan numor pada setiap kelompok dari bilangan terkecil samapai terbesar
-- gabungkan kembali kelompok nomor
-- tmapilkan hasilnya
-- selesai
