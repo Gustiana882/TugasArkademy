@@ -1,6 +1,6 @@
 const convertDate = (time) => {
-    var date = new Date(Number(time));
-    return date.toString();
-}
+  const date = new Date(Number(time));
+  return date.toString();
+};
 
-module.exports = convertDate
+module.exports = convertDate;

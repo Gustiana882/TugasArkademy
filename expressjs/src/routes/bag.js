@@ -1,8 +1,11 @@
-const express = require("express")
-const route = express.Router()
-const controller = require("../controllers/bag")
+const express = require('express');
 
-route.get('/',controller.getAllBag)
-route.post('/', controller.addBag)
+const route = express.Router();
+const controller = require('../controllers/bag');
 
-module.exports = route
+route.get('/', controller.getAllBag);
+route.post('/', controller.addBag);
+route.put('/', controller.updateBag);
+route.delete('/', controller.deleteBag);
+
+module.exports = route;

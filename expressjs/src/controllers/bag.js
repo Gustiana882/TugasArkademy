@@ -1,45 +1,54 @@
-const bag = {}
-const model = require("../models/bag")
-const product = require("../models/product")
+const bags = {};
+const model = require('../models/bag');
 
-bag.getAllBag = async (req, res) => {
+bags.getAllBag = async (req, res) => {
+  try {
+    const getBag = await model.getAllBag();
+    const json = getBag.map((bag) => {
+      const totalPrice = bag.amount * bag.price;
+      const object = {
+        id: bag.id,
+        product_id: bag.product_id,
+        product_title: bag.title,
+        product_store: bag.store,
+        product_price: bag.price,
+        amount: bag.amount,
+        total_price: totalPrice,
+        create_at: bag.create_at,
+      };
+      return object;
+    });
+    res.send(json);
+  } catch (error) {
+    res.send(error);
+  }
+};
 
-    try{
-        const bag = await model.getAllBag()
-        let json = bag.map((bag)=>{
-            total_price = bag.amount*bag.price
-            let object = {
-                id : bag.id,
-                product_id : bag.product_id,
-                product_title : bag.title,
-                product_store : bag.store,
-                product_price : bag.price,
-                amount : bag.amount,
-                total_price : total_price,
-                create_at : bag.create_at
-            }
-            return object
-        })
-        res.send(json)
-    }
-    catch(error){
-        res.send(error)
-    }
+bags.addBag = async (req, res) => {
+  try {
+    const bag = await model.addBag(req.body);
+    res.send(bag);
+  } catch (error) {
+    res.send(error);
+  }
+};
 
-}
+bags.updateBag = async (req, res) => {
+  try {
+    const update = await model.updateBag(req.body);
+    res.send(update);
+  } catch (error) {
+    res.send(error);
+  }
+};
 
-bag.addBag = async (req, res) => {
-    try{
-        const bag = await model.addBag(req.body)
-        if(!bag[0]){
-            res.send({message : "success add to bag"})
-        }else{
-            res.send({message : "gagal"})
-        }
-    }catch(error){
-        res.send(error)
-    }
-}
+bags.deleteBag = async (req, res) => {
+  try {
+    const delete1 = await model.deleteBag(req.body);
+    res.send(delete1);
+  } catch (error) {
+    res.send(error);
+  }
+};
 
-
-module.exports = bag
+module.exports = bags;

@@ -1,23 +1,23 @@
-const express = require('express')
-const server = express()
-const PORT = 3000
+const express = require('express');
 
-const main = require('./src/main')
-const db = require('./src/configs/db')
-const { urlencoded } = require('express')
+const server = express();
+const PORT = 3000;
 
-server.use(express.json())
-server.use(express.urlencoded({extended:true}))
+const main = require('./src/main');
+const db = require('./src/configs/db');
 
-server.use(main)
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
+
+server.use(main);
 
 db.connect()
-    .then(() => {
-        server.listen(PORT, () =>{
-            console.log("connecting to database")
-            console.log(`running server at http://localhost:${PORT}`)
-        })
-    })
-    .catch(() => {
-        console.log("Error connection database")
-    })
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log('connecting to database');
+      console.log(`running server at http://localhost:${PORT}`);
+    });
+  })
+  .catch(() => {
+    console.log('Error connection database');
+  });
