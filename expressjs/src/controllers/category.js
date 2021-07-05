@@ -1,48 +1,49 @@
 const category = {};
 const model = require('../models/category');
+const response = require('../helpers/response');
 
 category.getAllCategory = async (req, res) => {
   try {
     const allCategory = await model.getAllCategory();
-    res.send(allCategory);
+    response(res, 200, allCategory);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 category.getCategoryById = async (req, res) => {
   try {
     const allCategory = await model.getCategoryById();
-    res.send(allCategory);
+    response(res, 200, allCategory);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 category.addCategory = async (req, res) => {
   try {
     const allCategory = await model.addCategory(req.body);
-    res.send(allCategory);
+    response(res, 200, allCategory);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 category.updateCategory = async (req, res) => {
   try {
     const update = await model.updateCategory(req.body);
-    res.send(update);
+    response(res, 200, update);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 category.deleteCategory = async (req, res) => {
   try {
     const allCategory = await model.deleteCategory(req.body);
-    res.send(allCategory);
+    response(res, 200, allCategory);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 

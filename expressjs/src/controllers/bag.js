@@ -1,5 +1,6 @@
 const bags = {};
 const model = require('../models/bag');
+const response = require('../helpers/response');
 
 bags.getAllBag = async (req, res) => {
   try {
@@ -18,36 +19,36 @@ bags.getAllBag = async (req, res) => {
       };
       return object;
     });
-    res.send(json);
+    response(res, 200, json);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 bags.addBag = async (req, res) => {
   try {
     const bag = await model.addBag(req.body);
-    res.send(bag);
+    response(res, 200, bag);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 bags.updateBag = async (req, res) => {
   try {
     const update = await model.updateBag(req.body);
-    res.send(update);
+    response(res, 200, update);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 bags.deleteBag = async (req, res) => {
   try {
     const delete1 = await model.deleteBag(req.body);
-    res.send(delete1);
+    response(res, 200, delete1);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 

@@ -1,31 +1,14 @@
 const products = {};
 const model = require('../models/product');
 const categorymodel = require('../models/category');
+const response = require('../helpers/response');
 
 products.getAllProduct = async (req, res) => {
   try {
     const allProduct = await model.getAllProduct();
-    const json = allProduct.map((product) => {
-      const object = {
-        id_product: product.id,
-        title: product.title,
-        category: [{
-          id: product.category_id,
-          name: product.category_name,
-        }],
-        price: product.price,
-        store: product.store,
-        review: product.review,
-        star: product.star,
-        image: product.image,
-        create_at: product.create_at,
-        update_at: product.update_at,
-      };
-      return object;
-    });
-    res.send(json);
+    response(res, 200, allProduct);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
@@ -34,13 +17,13 @@ products.addProduct = async (req, res) => {
     const category = await categorymodel.getCategoryById(req.body.category);
 
     if (!category[0]) {
-      res.send({ message: 'Category ID not found!' });
+      response(res, 304, { message: 'Category ID not found!' });
     } else {
       const respons = await model.addProduct(req.body);
-      res.send(respons);
+      response(res, 200, respons);
     }
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
@@ -48,49 +31,48 @@ products.updateProduct = async (req, res) => {
   try {
     const cekid = await model.getProductById(req.body.id);
     if (!cekid[0]) {
-      res.send({ message: 'ID not found' });
+      response(res, 304, { message: 'ID not found' });
     } else {
       const respons = await model.updateProduct(req.body);
-      res.send(respons);
+      response(res, 200, respons);
     }
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 products.deleteProduct = async (req, res) => {
   try {
     const respons = await model.deleteProduct(req.body);
-    res.send(respons);
+    response(res, 200, respons);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
   }
 };
 
 products.searchProduct = async (req, res) => {
   try {
-    const allProduct = await model.searchProduct(req.params);
-    const json = allProduct.map((search) => {
-      const object = {
-        id_search: search.id,
-        title: search.title,
-        category: [{
-          id: search.category_id,
-          name: search.category_name,
-        }],
-        price: search.price,
-        store: search.store,
-        review: search.review,
-        star: search.star,
-        image: search.image,
-        create_at: search.create_at,
-        update_at: search.update_at,
-      };
-      return object;
-    });
-    res.send(json);
+    const searchProduct = await model.searchProduct(req.query);
+    response(res, 200, searchProduct);
   } catch (error) {
-    res.send(error);
+    response(res, 400, error);
+  }
+};
+
+products.fiter = async (req, res) => {
+  try {
+    const { name, category, price } = req.query;
+    let filter = await model.getAllProduct();
+    if (name === 'ASC' || name === 'DESC') {
+      filter = await model.getAllProduct('public.product.title', name);
+    } else if (price === 'ASC' || price === 'DESC') {
+      filter = await model.getAllProduct('public.product.price', price);
+    } else if (category) {
+      filter = filter.filter((product) => product.category[0].name === category);
+    }
+    response(res, 200, filter);
+  } catch (error) {
+    response(res, 400, error);
   }
 };
 

@@ -13,7 +13,9 @@ category.getAllCategory = () => new Promise((resolve, reject) => {
 });
 
 category.getCategoryById = (id) => new Promise((resolve, reject) => {
-  db.query('SELECT * FROM public.category WHERE id=$1', [id])
+  const query = 'SELECT * FROM public.category WHERE id=$1';
+  const value = [id];
+  db.query(query, value)
     .then((res) => {
       resolve(res.rows);
     })
@@ -26,9 +28,15 @@ category.addCategory = (data) => new Promise((resolve, reject) => {
   const time = new Date();
   const { name, image } = data;
   //    console.log(name);
-  db.query('INSERT INTO public.category (name, image, create_at, update_at) VALUES($1,$2,$3,$4)', [name, image, time, time])
+  const query = 'INSERT INTO public.category (name, image, create_at, update_at) VALUES($1,$2,$3,$4)';
+  const value = [name, image, time, time];
+  db.query(query, value)
     .then((res) => {
-      resolve(res);
+      if (res.rowCount) {
+        resolve({ message: 'Data Berhasil ditambahkan' });
+      } else {
+        resolve({ message: 'Data gagal ditambahkan!' });
+      }
     })
     .catch((err) => {
       reject(err.message);
@@ -38,8 +46,9 @@ category.addCategory = (data) => new Promise((resolve, reject) => {
 category.updateCategory = (data) => new Promise((resolve, reject) => {
   const updateAt = new Date();
   const { name, image, id } = data;
-  db.query('UPDATE public.category SET name=$1, image=$2, update_at=$3 WHERE id=$4',
-    [name, image, updateAt, id])
+  const query = 'UPDATE public.category SET name=$1, image=$2, update_at=$3 WHERE id=$4';
+  const value = [name, image, updateAt, id];
+  db.query(query, value)
     .then((res) => {
       if (res.rowCount) {
         resolve({ message: 'Data Berhasil diubah' });
